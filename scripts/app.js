@@ -13,6 +13,7 @@ function init() {
     let clikedCats = 0
     let hitsLeft
     let endGame = false
+    let countDown
 
     /*------------------------ Cached Element References ------------------------*/
     const gridElm = document.querySelector('.grid')
@@ -64,7 +65,7 @@ function init() {
             } else {
                 messageElm.textContent = `You have ${Math.max(0, hitsLeft)} hits left`
             }
-            if (clickCat >= hits) {
+            if (clikedCats >= hits) {
                 gameOver(true)
             } else {
                 addCat()
@@ -74,6 +75,10 @@ function init() {
     }
 
     function startGame() {
+        endGame = false
+        clikedCats = 0
+        score = 0
+        numOfSec = 30
         countDownTimer()
         addCat()
         speed = setInterval(addCat, levelSpeed)
