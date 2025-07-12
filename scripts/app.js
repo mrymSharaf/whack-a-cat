@@ -2,7 +2,6 @@ function init() {
 
     /*-------------------------------- Constants --------------------------------*/
     const totalCells = 6
-    const time = 30
 
 
     /*---------------------------- Variables (state) ----------------------------*/
@@ -10,6 +9,7 @@ function init() {
     let score = 0
     let speed
     let levelSpeed = 3000
+    let numOfSec = 30
 
     /*------------------------ Cached Element References ------------------------*/
     const gridElm = document.querySelector('.grid')
@@ -18,6 +18,7 @@ function init() {
     const easyLvl = document.querySelector('#easy')
     const midLvl = document.querySelector('#medium')
     const hardLvl = document.querySelector('#hard')
+    const timeElm = document.querySelector('#time')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
@@ -51,6 +52,7 @@ function init() {
     }
 
     function startGame() {
+        countDownTimer()
         addCat()
         speed = setInterval(addCat, levelSpeed)
     }
@@ -59,6 +61,18 @@ function init() {
         clearInterval(speed)
         addCat()
         speed = setInterval(addCat, levelSpeed)
+    }
+
+    function countDownTimer() {
+        let countDown = setInterval(() => {
+            if (numOfSec <= 0) {
+                numOfSec = 0
+                clearInterval(countDown)
+            }
+            timeElm.textContent = `0:${numOfSec}`
+            numOfSec -= 1
+        }, 1000)
+
     }
 
     function render() {
