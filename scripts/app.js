@@ -7,10 +7,11 @@ function init() {
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
+    let score = 0
 
     /*------------------------ Cached Element References ------------------------*/
     const gridElm = document.querySelector('.grid')
-
+    const scoreElm = document.querySelector('#score')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
@@ -18,6 +19,7 @@ function init() {
             const cell = document.createElement('div')
             cell.classList.add('cell')
             gridElm.appendChild(cell)
+            gridElm.addEventListener('click', clickCat)
             cells.push(cell)
         }
     }
@@ -32,6 +34,16 @@ function init() {
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
         randomCell.classList.add('cat')
+    }
+
+    function clickCat(event) {
+        if (event.target.classList.contains('cat')) {
+            event.target.classList.remove('cat')
+            addCat()
+            score += 5
+            scoreElm.textContent = (score)
+
+        }
     }
 
     function render() {
