@@ -2,7 +2,7 @@ function init() {
 
     /*-------------------------------- Constants --------------------------------*/
     const totalCells = 6
-
+    const hits = 20
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
@@ -10,6 +10,9 @@ function init() {
     let speed
     let levelSpeed = 3000
     let numOfSec = 30
+    let clikedCats = 0
+    let hitsLeft
+    let endGame = false
 
     /*------------------------ Cached Element References ------------------------*/
     const gridElm = document.querySelector('.grid')
@@ -19,6 +22,7 @@ function init() {
     const midLvl = document.querySelector('#medium')
     const hardLvl = document.querySelector('#hard')
     const timeElm = document.querySelector('#time')
+    const messageElm = document.querySelector('.message')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
@@ -32,6 +36,9 @@ function init() {
     }
 
     function addCat() {
+        if (endGame)
+            return
+
         cells.forEach(cell => {
             cell.classList.remove('cat')
             cell.textContent = ''
@@ -46,8 +53,23 @@ function init() {
         if (event.target.classList.contains('cat')) {
             event.target.classList.remove('cat')
             addCat()
+
             score += 5
             scoreElm.textContent = score
+
+            clikedCats += 1
+            hitsLeft = hits - clikedCats
+            if (hitsLeft <= 0) {
+                messageElm.textContent = 'Winner!'
+            } else {
+                messageElm.textContent = `You have ${Math.max(0, hitsLeft)} hits left`
+            }
+            if (clickCat >= hits) {
+                gameOver(true)
+            } else {
+                addCat()
+            }
+
         }
     }
 
@@ -55,24 +77,45 @@ function init() {
         countDownTimer()
         addCat()
         speed = setInterval(addCat, levelSpeed)
+        messageElm.textContent = 'Starting..'
     }
 
     function levelChange() {
-        clearInterval(speed)
-        addCat()
-        speed = setInterval(addCat, levelSpeed)
+        if (speed)
+            clearInterval(speed)
+        if (!endGame) {
+            speed = setInterval(addCat, levelSpeed)
+        }
     }
 
     function countDownTimer() {
-        let countDown = setInterval(() => {
+        countDown = setInterval(() => {
             if (numOfSec <= 0) {
-                numOfSec = 0
                 clearInterval(countDown)
+                clearInterval(speed)
+                if (clikedCats >= hits) {
+                    gameOver(true)
+                }
+                else {
+                    gameOver(false)
+                }
             }
             timeElm.textContent = `0:${numOfSec}`
             numOfSec -= 1
         }, 1000)
 
+    }
+
+    function gameOver(win) {
+        endGame = true
+        clearInterval(speed)
+        clearInterval(countDown)
+        if (win) {
+            messageElm.textContent = 'Winner!'
+        }
+        if (!win) {
+            messageElm.textContent = 'You Loose!'
+        }
     }
 
     function render() {
