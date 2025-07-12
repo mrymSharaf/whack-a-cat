@@ -104,3 +104,10 @@ button:hover {
 .hidden {
     visibility: hidden;
 }
+
+.cat{
+    background-image: url('/assets/cat.png');
+    background-size: contain;
+     background-repeat: no-repeat;
+     background-position: center;
+}
