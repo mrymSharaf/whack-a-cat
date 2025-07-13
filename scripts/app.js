@@ -24,6 +24,7 @@ function init() {
     const hardLvl = document.querySelector('#hard')
     const timeElm = document.querySelector('#time')
     const messageElm = document.querySelector('.message')
+    const playAgainBtn = document.querySelector('#restart-game')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
@@ -121,6 +122,12 @@ function init() {
         if (!win) {
             messageElm.textContent = 'You Loose!'
         }
+        playAgainBtn.classList.toggle('hidden')
+    }
+
+    function playAgain() {
+        startGame()
+        playAgainBtn.classList.toggle('hidden')
     }
 
     function render() {
@@ -141,6 +148,8 @@ function init() {
         levelSpeed = 500
         levelChange()
     })
+
+    playAgainBtn.addEventListener('click', playAgain)
 
     render()
 }
