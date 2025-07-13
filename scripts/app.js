@@ -2,12 +2,13 @@ function init() {
 
     /*-------------------------------- Constants --------------------------------*/
     const totalCells = 6
-    const hits = 20
+    const hits = 15
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
     let score = 0
-    let speed
+    let catSpeed
+    let dogSpeed
     let levelSpeed = 1500
     let numOfSec = 30
     let clikedCats = 0
@@ -31,8 +32,8 @@ function init() {
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div')
             cell.classList.add('cell')
-            gridElm.addEventListener('click', clickCat)
-            gridElm.addEventListener('click', clickDog)
+            cell.addEventListener('click', clickCat)
+            cell.addEventListener('click', clickDog)
             gridElm.appendChild(cell)
             cells.push(cell)
         }
@@ -56,7 +57,6 @@ function init() {
     function clickCat(event) {
         if (event.target.classList.contains('cat')) {
             event.target.classList.remove('cat')
-            // addCat()
 
             score += 5
             scoreElm.textContent = score
@@ -70,7 +70,7 @@ function init() {
             }
             if (clikedCats >= hits) {
                 gameOver(true)
-            } 
+            }
 
         }
     }
@@ -84,7 +84,7 @@ function init() {
 
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
-        if (randomCell.classList.contains('cat')) {
+        if (!randomCell.classList.contains('cat')) {
             randomCell.classList.add('dog')
         }
     }
@@ -92,7 +92,6 @@ function init() {
     function clickDog(event) {
         if (event.target.classList.contains('dog')) {
             event.target.classList.remove('dog')
-            addDog()
 
             document.body.classList.add('freez-cursor')
             messageElm.textContent = 'You clicked a dog pausing..'
@@ -108,21 +107,22 @@ function init() {
         clikedCats = 0
         score = 0
         numOfSec = 30
+        hitsLeft = hits
         countDownTimer()
         addCat()
         addDog()
         playAgainBtn.classList.add('hidden')
-        speed = setInterval(addCat, levelSpeed)
-        speed = setInterval(addDog, levelSpeed)
+        catSpeed = setInterval(addCat, levelSpeed)
+        dogSpeed = setInterval(addDog, levelSpeed)
         messageElm.textContent = 'Starting..'
     }
 
     function levelChange() {
-        if (speed)
-            clearInterval(speed)
+        clearInterval(catSpeed)
+        clearInterval(dogSpeed)
         if (!endGame) {
-            speed = setInterval(addCat, levelSpeed)
-            speed = setInterval(addDog, levelSpeed)
+            catSpeed = setInterval(addCat, levelSpeed)
+            dogSpeed = setInterval(addDog, levelSpeed)
         }
     }
 
@@ -130,7 +130,8 @@ function init() {
         countDown = setInterval(() => {
             if (numOfSec <= 0) {
                 clearInterval(countDown)
-                clearInterval(speed)
+                clearInterval(catSpeed)
+                clearInterval(dogSpeed)
                 if (clikedCats >= hits) {
                     gameOver(true)
                 }
@@ -146,7 +147,8 @@ function init() {
 
     function gameOver(win) {
         endGame = true
-        clearInterval(speed)
+        clearInterval(catSpeed)
+        clearInterval(dogSpeed)
         clearInterval(countDown)
         if (win) {
             messageElm.textContent = 'Winner!'
