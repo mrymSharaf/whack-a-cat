@@ -102,10 +102,6 @@ button:hover {
     margin-bottom: 15px;
 }
 
-.hidden {
-    visibility: hidden;
-}
-
 .cat {
     background-image: url('/assets/cat.png');
     background-size: contain;
@@ -120,6 +116,6 @@ button:hover {
     background-position: center;
 }
 
-.freez-cursor{
+.freez-cursor {
     cursor: none;
 }
