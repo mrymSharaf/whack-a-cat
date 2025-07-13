@@ -6,6 +6,7 @@ function init() {
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
+    let dogCells = []
     let score = 0
     let speed
     let levelSpeed = 3000
@@ -33,6 +34,7 @@ function init() {
             cell.classList.add('cell')
             gridElm.appendChild(cell)
             gridElm.addEventListener('click', clickCat)
+            gridElm.addEventListener('click', clickDog)
             cells.push(cell)
         }
     }
@@ -70,8 +72,27 @@ function init() {
                 gameOver(true)
             } else {
                 addCat()
+                addDog()
             }
 
+        }
+    }
+
+    function addDog() {
+        cells.forEach(cell => {
+            cell.classList.remove('dog')
+            cell.textContent = ''
+        })
+
+        const randomIndx = Math.floor(Math.random() * cells.length)
+        const randomCell = cells[randomIndx]
+        randomCell.classList.add('dog')
+    }
+
+    function clickDog(event) {
+        if (!event.target.classList.contains('dog')) {
+            event.target.classList.remove('dog')
+            addDog()
         }
     }
 
@@ -82,7 +103,9 @@ function init() {
         numOfSec = 30
         countDownTimer()
         addCat()
+        addDog()
         speed = setInterval(addCat, levelSpeed)
+        speed = setInterval(addDog, levelSpeed)
         messageElm.textContent = 'Starting..'
     }
 
@@ -91,6 +114,7 @@ function init() {
             clearInterval(speed)
         if (!endGame) {
             speed = setInterval(addCat, levelSpeed)
+            speed = setInterval(addDog, levelSpeed)
         }
     }
 

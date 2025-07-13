@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Press+Start+2P&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
+* {
 
     font-family: "Press Start 2P", system-ui;
 }
+
 p {
     font-size: 25px;
     font-weight: bold;
@@ -105,9 +106,16 @@ button:hover {
     visibility: hidden;
 }
 
-.cat{
+.cat {
     background-image: url('/assets/cat.png');
     background-size: contain;
-     background-repeat: no-repeat;
-     background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.dog {
+    background-image: url('/assets/dog.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
