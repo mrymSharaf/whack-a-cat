@@ -6,10 +6,9 @@ function init() {
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
-    let dogCells = []
     let score = 0
     let speed
-    let levelSpeed = 3000
+    let levelSpeed = 1500
     let numOfSec = 30
     let clikedCats = 0
     let hitsLeft
@@ -50,6 +49,9 @@ function init() {
 
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
+        if (randomCell.classList.contains('dog')) {
+            return
+        }
         randomCell.classList.add('cat')
     }
 
@@ -86,13 +88,18 @@ function init() {
 
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
+        if (randomCell.classList.contains('cat')) {
+            return
+        }
         randomCell.classList.add('dog')
     }
 
     function clickDog(event) {
-        if (!event.target.classList.contains('dog')) {
+        if (event.target.classList.contains('dog')) {
             event.target.classList.remove('dog')
-            addDog()
+            if (!event.target.classList.contains('cat')) {
+                addDog()
+            }
         }
     }
 
@@ -161,7 +168,7 @@ function init() {
     /*----------------------------- Event Listeners -----------------------------*/
     playbtn.addEventListener('click', startGame)
     easyLvl.addEventListener('click', () => {
-        levelSpeed = 3000
+        levelSpeed = 1500
         levelChange()
     })
     midLvl.addEventListener('click', () => {
@@ -169,7 +176,7 @@ function init() {
         levelChange()
     })
     hardLvl.addEventListener('click', () => {
-        levelSpeed = 500
+        levelSpeed = 600
         levelChange()
     })
 
