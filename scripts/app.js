@@ -31,9 +31,9 @@ function init() {
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div')
             cell.classList.add('cell')
-            gridElm.appendChild(cell)
             gridElm.addEventListener('click', clickCat)
             gridElm.addEventListener('click', clickDog)
+            gridElm.appendChild(cell)
             cells.push(cell)
         }
     }
@@ -44,21 +44,19 @@ function init() {
 
         cells.forEach(cell => {
             cell.classList.remove('cat')
-            cell.textContent = ''
         })
 
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
-        if (randomCell.classList.contains('dog')) {
-            return
+        if (!randomCell.classList.contains('dog')) {
+            randomCell.classList.add('cat')
         }
-        randomCell.classList.add('cat')
     }
 
     function clickCat(event) {
         if (event.target.classList.contains('cat')) {
             event.target.classList.remove('cat')
-            addCat()
+            // addCat()
 
             score += 5
             scoreElm.textContent = score
@@ -72,34 +70,36 @@ function init() {
             }
             if (clikedCats >= hits) {
                 gameOver(true)
-            } else {
-                addCat()
-                addDog()
-            }
+            } 
 
         }
     }
 
     function addDog() {
+        if (endGame)
+            return
         cells.forEach(cell => {
             cell.classList.remove('dog')
-            cell.textContent = ''
         })
 
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
         if (randomCell.classList.contains('cat')) {
-            return
+            randomCell.classList.add('dog')
         }
-        randomCell.classList.add('dog')
     }
 
     function clickDog(event) {
         if (event.target.classList.contains('dog')) {
             event.target.classList.remove('dog')
-            if (!event.target.classList.contains('cat')) {
-                addDog()
-            }
+            addDog()
+
+            document.body.classList.add('freez-cursor')
+            messageElm.textContent = 'You clicked a dog pausing..'
+            setTimeout(() => {
+                document.body.classList.remove('freez-cursor')
+                messageElm.textContent = `You have ${Math.max(0, hitsLeft)} hits left`
+            }, 2000)
         }
     }
 
@@ -111,6 +111,7 @@ function init() {
         countDownTimer()
         addCat()
         addDog()
+        playAgainBtn.classList.add('hidden')
         speed = setInterval(addCat, levelSpeed)
         speed = setInterval(addDog, levelSpeed)
         messageElm.textContent = 'Starting..'
