@@ -25,6 +25,9 @@ function init() {
     const hardLvl = document.querySelector('#hard')
     const timeElm = document.querySelector('#time')
     const messageElm = document.querySelector('.message')
+    const howToPlayBtn = document.getElementById('how-to-play-btn')
+    const howToPlayDiv = document.getElementById('how-to-play')
+    const closeHowToBtn = document.getElementById('close-how-to')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
@@ -149,6 +152,7 @@ function init() {
         clearInterval(catSpeed)
         clearInterval(dogSpeed)
         clearInterval(countDown)
+
         if (win) {
             messageElm.textContent = 'Winner!'
         }
@@ -175,6 +179,15 @@ function init() {
     hardLvl.addEventListener('click', () => {
         levelSpeed = 600
         levelChange()
+    })
+
+    howToPlayBtn.addEventListener('click', () => {
+        howToPlayDiv.style.display = 'block'
+        howToPlayDiv.focus()
+    })
+
+    closeHowToBtn.addEventListener('click', () => {
+        howToPlayDiv.style.display = 'none'
     })
 
     render()
