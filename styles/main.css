@@ -17,11 +17,10 @@ p {
 body {
     background-image: url(/assets/backgrund1.png);
     text-align: center;
-    background-color: #1f3e5a;
+    background-color: #0a0710;
     padding: 20px;
     background-repeat: no-repeat;
     background-position: center;
-    border: 20px solid #1f3e5a;
 }
 
 .status-bar {

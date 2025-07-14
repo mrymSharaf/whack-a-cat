@@ -160,6 +160,10 @@ function init() {
             messageElm.textContent = 'You Loose!'
         }
         playbtn.textContent = 'Play Again'
+        cells.forEach(cell => {
+            cell.classList.remove('cat', 'dog');
+        });
+
     }
 
     function render() {
