@@ -10,42 +10,43 @@
 </head>
 
 <body>
-    <p>Whack a Cat</p>
-    <div class="status-bar">
-        <span>Time: <span id="time">0:30</span></span>
-        <span>Score: <span id="score">0</span></span>
-    </div>
-
-    <div class="message"></div>
-    <button id="play-game">Play</button>
-    <div class="play-container">
-        <button id="how-to-play-btn" class="how-to-btn" title="How to Play?">?</button>
-    </div>
-
-    <div id="how-to-play" class="how-to-play-popup">
-        <div class="how-to-play-content">
-            <h3 id="howToPlayTitle">How to Play</h3>
-            <ul>
-                <li>Click on cats as fast as you can.</li>
-                <li>Avoid clicking dogs — it pauses the game!</li>
-                <li>Reach 15 hits before time runs out to win.</li>
-                <li>Choose difficulty to speed up the game.</li>
-            </ul>
-            <button id="close-how-to" class="close-btn" aria-label="Close How to Play">Close</button>
+    <section id="background-img">
+        <p>Whack a Cat</p>
+        <div class="status-bar">
+            <span>Time: <span id="time">0:30</span></span>
+            <span>Score: <span id="score">0</span></span>
         </div>
-    </div>
 
-
-    <div class="wrapper">
-        <div class="grid" class="cat" class="dog" class="freez-cursor">
+        <div class="message"> . </div>
+        <button id="play-game">Play</button>
+        <div class="play-container">
+            <button id="how-to-play-btn" class="how-to-btn" title="How to Play?">?</button>
         </div>
-    </div>
 
-    <div class="level-btns">
-        <button id="easy" class="level-btn">Easy</button>
-        <button id="medium" class="level-btn">Medium</button>
-        <button id="hard" class="level-btn">Hard</button>
-    </div>
+        <div id="how-to-play" class="how-to-play-popup">
+            <div class="how-to-play-content">
+                <h3 id="howToPlayTitle">How to Play</h3>
+                <ul>
+                    <li>Click on cats as fast as you can.</li>
+                    <li>Avoid clicking dogs, it pauses your clicking!</li>
+                    <li>Reach <span id="hits-num">18</span> hits before time runs out to win.</li>
+                    <li>Choose difficulty to speed up the game.</li>
+                </ul>
+                <button id="close-how-to" class="close-btn">Close</button>
+            </div>
+        </div>
+
+
+        <div class="wrapper">
+            <div class="grid" class="cat" class="dog" class="freez-cursor">
+            </div>
+        </div>
+        <div class="level-btns" class="hidden">
+            <button id="easy" class="level-btn" class="hidden">Easy</button>
+            <button id="medium" class="level-btn" class="hidden">Medium</button>
+            <button id="hard" class="level-btn" class="hidden">Hard</button>
+        </div>
+    </section>
 </body>
 
 </html>

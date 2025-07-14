@@ -1,8 +1,8 @@
 function init() {
 
     /*-------------------------------- Constants --------------------------------*/
-    const totalCells = 6
-    const hits = 15
+    const totalCells = 10
+    const hits = 18
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
@@ -116,6 +116,9 @@ function init() {
         playbtn.textContent = 'Play'
         catSpeed = setInterval(addCat, levelSpeed)
         dogSpeed = setInterval(addDog, levelSpeed)
+        setTimeout(() => {
+            messageElm.textContent = 'Play'
+        }, 800)
         messageElm.textContent = 'Starting..'
     }
 
@@ -143,6 +146,13 @@ function init() {
             }
             timeElm.textContent = `0:${numOfSec}`
             numOfSec -= 1
+
+            if(numOfSec <=9){
+                timeElm.classList.add('time-red')
+            }
+            else{
+                timeElm.classList.remove('time-red')
+            }
         }, 1000)
 
     }
