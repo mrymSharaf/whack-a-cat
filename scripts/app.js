@@ -9,7 +9,7 @@ function init() {
     let score = 0
     let catSpeed
     let dogSpeed
-    let levelSpeed = 1500
+    let levelSpeed = 1300
     let numOfSec = 30
     let clikedCats = 0
     let hitsLeft
@@ -28,6 +28,7 @@ function init() {
     const howToPlayBtn = document.getElementById('how-to-play-btn')
     const howToPlayDiv = document.getElementById('how-to-play')
     const closeHowToBtn = document.getElementById('close-how-to')
+    const lvlBtn = document.querySelectorAll('.level-btn')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
@@ -120,6 +121,10 @@ function init() {
             messageElm.textContent = 'Play'
         }, 800)
         messageElm.textContent = 'Starting..'
+
+        lvlBtn.forEach(btn => {
+            btn.classList.remove('level-btn')
+        })
     }
 
     function levelChange() {
@@ -147,10 +152,10 @@ function init() {
             timeElm.textContent = `0:${numOfSec}`
             numOfSec -= 1
 
-            if(numOfSec <=9){
+            if (numOfSec <= 9) {
                 timeElm.classList.add('time-red')
             }
-            else{
+            else {
                 timeElm.classList.remove('time-red')
             }
         }, 1000)
@@ -183,11 +188,11 @@ function init() {
     /*----------------------------- Event Listeners -----------------------------*/
     playbtn.addEventListener('click', startGame)
     easyLvl.addEventListener('click', () => {
-        levelSpeed = 1500
+        levelSpeed = 1300
         levelChange()
     })
     midLvl.addEventListener('click', () => {
-        levelSpeed = 1000
+        levelSpeed = 900
         levelChange()
     })
     hardLvl.addEventListener('click', () => {
@@ -197,7 +202,7 @@ function init() {
 
     howToPlayBtn.addEventListener('click', () => {
         howToPlayDiv.style.display = 'block'
-        howToPlayDiv.focus()
+        // howToPlayDiv.focus()
     })
 
     closeHowToBtn.addEventListener('click', () => {
