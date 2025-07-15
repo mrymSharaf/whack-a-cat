@@ -12,28 +12,28 @@
 <body>
     <div id="home-page">
         <div id="home-page-bg">
-        <p id="home-title">Whack a Cat</p>
-        <div id="home-page-elms">
-            <p>Choose a level </p>
-            <div class="level-btns">
-                <button id="easy" class="level-btn">Easy</button>
-                <button id="medium" class="level-btn">Medium</button>
-                <button id="hard" class="level-btn">Hard</button>
+            <p id="home-title">Whack a Cat</p>
+            <div id="home-page-elms">
+                <p>Choose a level </p>
+                <div class="level-btns">
+                    <button id="easy" class="level-btn">Easy</button>
+                    <button id="medium" class="level-btn">Medium</button>
+                    <button id="hard" class="level-btn">Hard</button>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 
     <div id="game-page">
-        <section id="background-img-game" class="warning-flash">
+        <section id="background-img-game">
             <p>Whack a Cat</p>
             <div class="status-bar">
                 <span>Time: <span id="time">0:30</span></span>
                 <span>Score: <span id="score">0</span></span>
             </div>
 
-            <div class="message"> . </div>
-            <button id="play-game">Play</button>
+            <div class="message"> Press Start to Play </div>
+            <button id="play-game">Start</button>
             <div class="play-container">
                 <button id="how-to-play-btn" class="how-to-btn" title="How to Play?">?</button>
             </div>
@@ -45,11 +45,14 @@
                         <li>Click on cats as fast as you can.</li>
                         <li>Avoid clicking dogs, it pauses your clicking!</li>
                         <li>Reach <span id="hits-num">18</span> hits before time runs out to win.</li>
-                        <li>Choose difficulty to speed up the game.</li>
                     </ul>
                     <button id="close-how-to" class="close-btn">Close</button>
                 </div>
             </div>
+
+            <p id='win-msg' class="hidden">Winner!</p>
+            <p id='lose-msg' class="hidden"> You Lose!</p>
+
             <div class="wrapper">
                 <div class="grid" class="cat" class="dog" class="freez-cursor">
                 </div>

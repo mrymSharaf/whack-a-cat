@@ -9,7 +9,7 @@ function init() {
     let score = 0
     let catSpeed
     let dogSpeed
-    let levelSpeed = 2000
+    let levelSpeed = 1700
     let numOfSec = 30
     let clikedCats = 0
     let hitsLeft
@@ -28,15 +28,16 @@ function init() {
     const howToPlayBtn = document.getElementById('how-to-play-btn')
     const howToPlayDiv = document.getElementById('how-to-play')
     const closeHowToBtn = document.getElementById('close-how-to')
-    const lvlBtn = document.querySelectorAll('.level-btn')
+    const loseMsg = document.getElementById('lose-msg')
+    const winMsg = document.getElementById('win-msg')
+    const redWarning = document.getElementById('background-img-game')
 
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div')
             cell.classList.add('cell')
-            cell.addEventListener('click', clickCat)
-            cell.addEventListener('click', clickDog)
+            cell.addEventListener('click', clickAnimal)
             gridElm.appendChild(cell)
             cells.push(cell)
         }
@@ -52,12 +53,29 @@ function init() {
 
         const randomIndx = Math.floor(Math.random() * cells.length)
         const randomCell = cells[randomIndx]
+
         if (!randomCell.classList.contains('dog')) {
             randomCell.classList.add('cat')
-        } 
+        }
     }
 
-    function clickCat(event) {
+    function addDog() {
+        if (endGame)
+            return
+
+        cells.forEach(cell => {
+            cell.classList.remove('dog')
+        })
+
+        const randomIndx = Math.floor(Math.random() * cells.length)
+        const randomCell = cells[randomIndx]
+
+        if (!randomCell.classList.contains('cat')) {
+            randomCell.classList.add('dog')
+        }
+    }
+
+    function clickAnimal(event) {
         if (event.target.classList.contains('cat')) {
             event.target.classList.remove('cat')
 
@@ -66,43 +84,40 @@ function init() {
 
             clikedCats += 1
             hitsLeft = hits - clikedCats
+
             if (hitsLeft <= 0) {
-                messageElm.textContent = 'Winner!'
+                winMsg.classList.remove('hidden')
+                messageElm.textContent = '.'
             } else {
                 messageElm.textContent = `You have ${Math.max(0, hitsLeft)} hits left`
             }
+
             if (clikedCats >= hits) {
                 gameOver(true)
             }
 
-        }
-    }
-
-    function addDog() {
-        if (endGame)
-            return
-        cells.forEach(cell => {
-            cell.classList.remove('dog')
-        })
-
-        const randomIndx = Math.floor(Math.random() * cells.length)
-        const randomCell = cells[randomIndx]
-        if (!randomCell.classList.contains('cat')) {
-            randomCell.classList.add('dog')
-        }
-    }
-
-    function clickDog(event) {
-        if (event.target.classList.contains('dog')) {
+        } else if (event.target.classList.contains('dog')) {
             event.target.classList.remove('dog')
+
+            redWarning.classList.remove('red-flash')
+            redWarning.offsetWidth
+            redWarning.classList.add('red-flash')
 
             document.body.classList.add('freez-cursor')
             messageElm.textContent = 'You clicked a dog pausing..'
+
             setTimeout(() => {
                 document.body.classList.remove('freez-cursor')
                 messageElm.textContent = `You have ${Math.max(0, hitsLeft)} hits left`
             }, 2000)
         }
+    }
+
+
+    function removeAnimels() {
+        cells.forEach(cell => {
+            cell.classList.remove('cat', 'dog')
+        })
     }
 
     function startGame() {
@@ -111,34 +126,36 @@ function init() {
         score = 0
         numOfSec = 30
         hitsLeft = hits
+
         countDownTimer()
         addCat()
         addDog()
-        playbtn.textContent = 'Play'
-        catSpeed = setInterval(addCat, levelSpeed)
-        dogSpeed = setInterval(addDog, levelSpeed)
-        setTimeout(() => {
-            messageElm.textContent = 'Play'
-        }, 800)
-        messageElm.textContent = 'Starting..'
 
-    }
-
-    function levelChange() {
         clearInterval(catSpeed)
         clearInterval(dogSpeed)
-        if (!endGame) {
-            catSpeed = setInterval(addCat, levelSpeed)
-            dogSpeed = setInterval(addDog, levelSpeed)
-        }
+
+        catSpeed = setInterval(addCat, levelSpeed)
+        dogSpeed = setInterval(addDog, levelSpeed)
+
+        playbtn.textContent = 'Start'
+        messageElm.textContent = 'Play'
+        messageElm.textContent = 'You have 18 hits left'
+
+
+        winMsg.classList.add('hidden')
+        loseMsg.classList.add('hidden')
+
     }
 
     function countDownTimer() {
+        clearInterval(countDown)
+
         countDown = setInterval(() => {
             if (numOfSec <= 0) {
                 clearInterval(countDown)
                 clearInterval(catSpeed)
                 clearInterval(dogSpeed)
+
                 if (clikedCats >= hits) {
                     gameOver(true)
                 }
@@ -146,6 +163,7 @@ function init() {
                     gameOver(false)
                 }
             }
+
             timeElm.textContent = `0:${numOfSec}`
             numOfSec -= 1
 
@@ -164,18 +182,17 @@ function init() {
         clearInterval(catSpeed)
         clearInterval(dogSpeed)
         clearInterval(countDown)
+        removeAnimels()
 
         if (win) {
-            messageElm.textContent = 'Winner!'
+            winMsg.classList.remove('hidden')
+            messageElm.textContent = '.'
         }
         if (!win) {
-            messageElm.textContent = 'You Loose!'
+            loseMsg.classList.remove('hidden')
         }
-        playbtn.textContent = 'Play Again'
-        cells.forEach(cell => {
-            cell.classList.remove('cat', 'dog');
-        });
 
+        playbtn.textContent = 'Play Again'
     }
 
     function pages(page) {
@@ -191,29 +208,28 @@ function init() {
 
     /*----------------------------- Event Listeners -----------------------------*/
     playbtn.addEventListener('click', startGame)
+
     easyLvl.addEventListener('click', () => {
-        levelSpeed = 2000
-        levelChange()
+        levelSpeed = 1700
+        removeAnimels()
     })
     midLvl.addEventListener('click', () => {
         levelSpeed = 1000
-        levelChange()
+        removeAnimels()
     })
     hardLvl.addEventListener('click', () => {
         levelSpeed = 600
-        levelChange()
+        removeAnimels()
     })
-    
+
     howToPlayBtn.addEventListener('click', () => {
         howToPlayDiv.style.display = 'block'
-        // howToPlayDiv.focus()
     })
 
     closeHowToBtn.addEventListener('click', () => {
         howToPlayDiv.style.display = 'none'
     })
 
-    pages('home-page')
     document.getElementById('easy').addEventListener('click', () => {
         pages('game-page')
     })
@@ -224,6 +240,7 @@ function init() {
         pages('game-page')
     })
 
+    pages('home-page')
     render()
 }
 document.addEventListener('DOMContentLoaded', init)

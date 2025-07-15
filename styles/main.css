@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Lexend:wght@100..900&family=Press+Start+2P&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-* {
-    font-family: "Press Start 2P", system-ui;
-}
+* {font-family: "Press Start 2P", system-ui;}
 
 p {
     font-size: 25px;
@@ -36,7 +34,7 @@ body {
 #home-title {
     margin-top: 150px;
     text-align: center;
-    font-size: 60px;
+    font-size: 49px;
 }
 
 #home-page {
@@ -46,15 +44,23 @@ body {
     flex-direction: column;
 }
 
-/* #home-page-bg{
-background-image: url(/assets/backgrund-main.png);
-    background-repeat: repeat;
-} */
+#home-page-bg {
+    background-image: url(/assets/background-main.png);
+    padding: 10px;
+    width: 670px;
+    margin: auto;
+    border: 3px solid rgb(173, 171, 171);
+    border-radius: 2px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top: 50px;
+}
 
 #home-page-elms {
     display: flex;
     flex-direction: column;
-    margin-top: 70px;
+    margin-top: 60px;
 }
 
 .status-bar {
@@ -97,7 +103,6 @@ background-image: url(/assets/backgrund-main.png);
     justify-content: center;
 }
 
-
 button {
     margin: 10px;
     padding: 10px 20px;
@@ -137,14 +142,30 @@ button:hover {
 }
 
 .message {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
-    color: rgb(189, 187, 187);
+    color: rgb(216, 213, 213);
     margin-bottom: 15px;
 }
 
+#win-msg, #lose-msg {
+    position: absolute;
+    margin-top: 90px;
+    margin-top: 50px;
+    margin-left: 180px;
+    width: 300px;
+    padding: 25px 15px;
+    background-color: #102449;;
+    color:  #b3d9ff;
+    border: 3px solid #123157;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 0 13px rgba(255, 255, 255, 0.4);
+}
+
 .cat {
-    background-image: url('/assets/catSpace-removebg-preview.png');
+    background-image: url('/assets/catSpace.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -197,7 +218,6 @@ button:hover {
     padding: 20px;
     width: 400px;
     box-shadow: 0 0 15px #30475b;
-    z-index: 10000;
 }
 
 .how-to-play-content ul {
@@ -226,3 +246,17 @@ button:hover {
     color: #4c6277;
 }
 
+.hidden {
+    display: none;
+}
+
+@keyframes redBorderFlash {
+    0% {box-shadow: 0 0 0px 0px rgba(255, 0, 0, 0);}
+    20% {box-shadow: 0 0 25px 5px rgba(255, 0, 0, 0.8);}
+    80% {box-shadow: 0 0 25px 5px rgba(255, 0, 0, 0.8);}
+    100% {box-shadow: 0 0 0px 0px rgba(255, 0, 0, 0);}
+}
+
+#background-img-game.red-flash {
+    animation: redBorderFlash 0.5s ease;
+}
