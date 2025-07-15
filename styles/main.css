@@ -19,18 +19,42 @@ body {
     background-position: center;
 }
 
-#background-img {
-    background-image: url('/assets/bakground00.png');
+#background-img-game {
+    background-image: url('/assets/background0.png');
     padding: 10px;
-    width: 800px;
+    width: 680px;
     margin: auto;
     border: 3px solid rgb(173, 171, 171);
     border-radius: 2px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    /* box-shadow: 5px 5px 8px rgb(238, 236, 236); */
+    margin-top: 50px;
 
+}
+
+#home-title {
+    margin-top: 150px;
+    text-align: center;
+    font-size: 60px;
+}
+
+#home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* #home-page-bg{
+background-image: url(/assets/backgrund-main.png);
+    background-repeat: repeat;
+} */
+
+#home-page-elms {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
 }
 
 .status-bar {
@@ -93,19 +117,19 @@ button:hover {
 .level-btns {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 25px;
     margin-bottom: 20px;
 }
 
 .level-btn {
-    padding: 13px 17px;
+    padding: 15px 23px;
+    margin-top: 30px;
     background-color: #2d3f7b;
     color: white;
     border: none;
     border-radius: 6px;
     font-size: 12px;
     transition: background-color 0.3s;
-    visibility: hidden;
 }
 
 .level-btn:hover {

@@ -9,7 +9,7 @@ function init() {
     let score = 0
     let catSpeed
     let dogSpeed
-    let levelSpeed = 1300
+    let levelSpeed = 2000
     let numOfSec = 30
     let clikedCats = 0
     let hitsLeft
@@ -54,7 +54,7 @@ function init() {
         const randomCell = cells[randomIndx]
         if (!randomCell.classList.contains('dog')) {
             randomCell.classList.add('cat')
-        }
+        } 
     }
 
     function clickCat(event) {
@@ -122,9 +122,6 @@ function init() {
         }, 800)
         messageElm.textContent = 'Starting..'
 
-        lvlBtn.forEach(btn => {
-            btn.classList.remove('level-btn')
-        })
     }
 
     function levelChange() {
@@ -181,6 +178,13 @@ function init() {
 
     }
 
+    function pages(page) {
+        document.getElementById('home-page').style.display = 'none'
+        document.getElementById('game-page').style.display = 'none'
+        document.getElementById(page).style.display = 'block'
+    }
+
+
     function render() {
         createGrid()
     }
@@ -188,18 +192,18 @@ function init() {
     /*----------------------------- Event Listeners -----------------------------*/
     playbtn.addEventListener('click', startGame)
     easyLvl.addEventListener('click', () => {
-        levelSpeed = 1300
+        levelSpeed = 2000
         levelChange()
     })
     midLvl.addEventListener('click', () => {
-        levelSpeed = 900
+        levelSpeed = 1000
         levelChange()
     })
     hardLvl.addEventListener('click', () => {
         levelSpeed = 600
         levelChange()
     })
-
+    
     howToPlayBtn.addEventListener('click', () => {
         howToPlayDiv.style.display = 'block'
         // howToPlayDiv.focus()
@@ -207,6 +211,17 @@ function init() {
 
     closeHowToBtn.addEventListener('click', () => {
         howToPlayDiv.style.display = 'none'
+    })
+
+    pages('home-page')
+    document.getElementById('easy').addEventListener('click', () => {
+        pages('game-page')
+    })
+    document.getElementById('medium').addEventListener('click', () => {
+        pages('game-page')
+    })
+    document.getElementById('hard').addEventListener('click', () => {
+        pages('game-page')
     })
 
     render()
