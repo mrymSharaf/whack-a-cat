@@ -3,15 +3,18 @@ function init() {
     /*-------------------------------- Constants --------------------------------*/
     const totalCells = 10
     const hits = 18
+    const dogStrike = 3
 
     /*---------------------------- Variables (state) ----------------------------*/
     let cells = []
     let score = 0
     let catSpeed
     let dogSpeed
-    let levelSpeed = 1700
+    let levelSpeed = 1500
     let numOfSec = 30
     let clikedCats = 0
+    let clickedDogs = 0
+    let strikeLeft
     let hitsLeft
     let endGame = false
     let countDown
@@ -31,7 +34,9 @@ function init() {
     const loseMsg = document.getElementById('lose-msg')
     const winMsg = document.getElementById('win-msg')
     const redWarning = document.getElementById('background-img-game')
-
+    const heart1 = document.getElementById('heart1')
+    const heart2 = document.getElementById('heart2')
+    const heart3 = document.getElementById('heart3')
     /*-------------------------------- Functions --------------------------------*/
     function createGrid() {
         for (let i = 0; i < totalCells; i++) {
@@ -99,12 +104,26 @@ function init() {
         } else if (event.target.classList.contains('dog')) {
             event.target.classList.remove('dog')
 
+            clickedDogs++
+            strikeLeft = dogStrike - clickedDogs
+
+            if(strikeLeft === 2){
+               heart1.classList.add('hidden')
+            }
+            else if(strikeLeft == 1){
+                heart2.classList.add('hidden')
+            }
+            else if(strikeLeft == 0){
+                loseMsg.classList.remove('hidden')
+                heart3.classList.add('hidden')
+                gameOver()
+            }
+
             redWarning.classList.remove('red-flash')
             redWarning.offsetWidth
             redWarning.classList.add('red-flash')
 
             document.body.classList.add('freez-cursor')
-            messageElm.textContent = 'You clicked a dog pausing..'
 
             setTimeout(() => {
                 document.body.classList.remove('freez-cursor')
@@ -126,6 +145,8 @@ function init() {
         score = 0
         numOfSec = 30
         hitsLeft = hits
+        clickedDogs = 0
+        strikeLeft = dogStrike
 
         countDownTimer()
         addCat()
@@ -138,12 +159,15 @@ function init() {
         dogSpeed = setInterval(addDog, levelSpeed)
 
         playbtn.textContent = 'Start'
-        messageElm.textContent = 'Play'
         messageElm.textContent = 'You have 18 hits left'
 
 
         winMsg.classList.add('hidden')
         loseMsg.classList.add('hidden')
+
+        heart1.classList.remove('hidden')
+        heart2.classList.remove('hidden')
+        heart3.classList.remove('hidden')
 
     }
 
@@ -210,7 +234,7 @@ function init() {
     playbtn.addEventListener('click', startGame)
 
     easyLvl.addEventListener('click', () => {
-        levelSpeed = 1700
+        levelSpeed = 1500
         removeAnimels()
     })
     midLvl.addEventListener('click', () => {
@@ -218,7 +242,7 @@ function init() {
         removeAnimels()
     })
     hardLvl.addEventListener('click', () => {
-        levelSpeed = 600
+        levelSpeed = 500
         removeAnimels()
     })
 

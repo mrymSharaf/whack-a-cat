@@ -218,6 +218,7 @@ button:hover {
     padding: 20px;
     width: 400px;
     box-shadow: 0 0 15px #30475b;
+    z-index: 1000;
 }
 
 .how-to-play-content ul {
@@ -259,4 +260,15 @@ button:hover {
 
 #background-img-game.red-flash {
     animation: redBorderFlash 0.5s ease;
+}
+
+aside {
+    position:absolute;
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    align-content: flex-start;
+    margin-left: 40px;
+    gap:10px;
 }

@@ -26,13 +26,18 @@
 
     <div id="game-page">
         <section id="background-img-game">
+            <aside>
+                <p id="heart1" class="hidden"> ⭐ </p>
+                <p id="heart2" class="hidden"> ⭐ </p>
+                <p id="heart3" class="hidden"> ⭐ </p>
+            </aside>
             <p>Whack a Cat</p>
+            <div class="message"> Press Start to Play </div>
             <div class="status-bar">
                 <span>Time: <span id="time">0:30</span></span>
                 <span>Score: <span id="score">0</span></span>
             </div>
 
-            <div class="message"> Press Start to Play </div>
             <button id="play-game">Start</button>
             <div class="play-container">
                 <button id="how-to-play-btn" class="how-to-btn" title="How to Play?">?</button>
@@ -44,6 +49,7 @@
                     <ul>
                         <li>Click on cats as fast as you can.</li>
                         <li>Avoid clicking dogs, it pauses your clicking!</li>
+                        <li>You have 3 lives try not to click on a dog</li>
                         <li>Reach <span id="hits-num">18</span> hits before time runs out to win.</li>
                     </ul>
                     <button id="close-how-to" class="close-btn">Close</button>
