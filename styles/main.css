@@ -18,7 +18,7 @@ body {
 }
 
 #background-img-game {
-    background-image: url('/assets/background0.png');
+    background-image: url('../assets/background0.png');
     padding: 10px;
     width: 680px;
     margin: auto;
@@ -45,7 +45,7 @@ body {
 }
 
 #home-page-bg {
-    background-image: url(/assets/background-main.png);
+    background-image: url('../assets/background-main.png');
     padding: 10px;
     width: 670px;
     margin: auto;
@@ -165,14 +165,14 @@ button:hover {
 }
 
 .cat {
-    background-image: url('/assets/catSpace.png');
+    background-image: url('../assets/catSpace.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .dog {
-    background-image: url('/assets/dogSpace.png');
+    background-image: url('../assets/dogSpace.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
