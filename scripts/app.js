@@ -81,6 +81,9 @@ function init() {
     }
 
     function clickAnimal(event) {
+        if(endGame) 
+            return
+        
         if (event.target.classList.contains('cat')) {
             event.target.classList.remove('cat')
 
@@ -143,10 +146,12 @@ function init() {
         endGame = false
         clikedCats = 0
         score = 0
+        scoreElm.textContent = 0
         numOfSec = 30
         hitsLeft = hits
         clickedDogs = 0
         strikeLeft = dogStrike
+        timeElm.textContent = '0:30'
 
         countDownTimer()
         addCat()

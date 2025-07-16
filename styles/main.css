@@ -259,7 +259,7 @@ button:hover {
 }
 
 #background-img-game.red-flash {
-    animation: redBorderFlash 0.5s ease;
+    animation: redBorderFlash 1.5s ease;
 }
 
 aside {
