@@ -6,15 +6,15 @@ Whack-a-Cat is a fast-paced browser game inspired by the classic "Whac-A-Mole" a
 
 I created this game to improve my JavaScript skills and challenge myself with DOM manipulation, timers, event handling, and custom styling. The space theme and characters were added to enhance the experience and make it more fun and visually engaging.
 
-[PlayPage](\readme-assets\Whack-a-cat-StartGame)
+<img width="1126" height="775" alt="Image" src="https://github.com/user-attachments/assets/439a7b8d-5c19-42b6-ad18-aaca815b4bf7" />
 
 ---
 
 ##  Getting Started
 
 - Play the game here: [Link to Deployed Game]
-- planning materials: [Game Plan & Pseudocode](\readme-assets\projectPlan.pdf)
-
+- planning materials: [projectPlan.pdf](https://github.com/user-attachments/files/21255249/projectPlan.pdf)
+  
 ### How to Play:
 - Choose your difficulty level (Easy, Medium, Hard).
 - Click on as many cats as you can before time runs out.
@@ -26,7 +26,7 @@ I created this game to improve my JavaScript skills and challenge myself with DO
 
 ##  Attributions
 
-- [Cat Image](\assets\catSpace)(https://www.redbubble.com/i/sticker/Space-Cat-in-Space-by-muraticum/64301286.EJUG5)
+- [Cat Image](https://www.redbubble.com/i/sticker/Space-Cat-in-Space-by-muraticum/64301286.EJUG5)
 - [Dog Image]
 - [Home page background image]
 - [Game page background image]
